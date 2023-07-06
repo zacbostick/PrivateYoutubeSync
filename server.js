@@ -1,14 +1,18 @@
 const express = require('express');
 const fs = require('fs');
-const app = express();
-const port = 3000;
 const https = require('https');
 const path = require('path');
-const credentials = require('./credentials.json');
+const { google } = require('googleapis');
 const { Parser } = require('json2csv');
+const credentials = require('./credentials.json');
+
+const app = express();
+const port = 3000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 
 const { client_id, client_secret, redirect_uris } = credentials.installed;
-const { google } = require('googleapis');
 const oauth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
 const scopes = ['https://www.googleapis.com/auth/youtube.readonly'];
 const authUrl = oauth2Client.generateAuthUrl({ access_type: 'offline', scope: scopes });
@@ -51,16 +55,7 @@ function downloadImage(url, dest, cb) {
 }
 
 app.get('/', (req, res) => {
-  res.redirect('/authorize');
-});
-
-app.get('/authorize', (req, res) => {
   res.redirect(authUrl);
-});
-
-app.get('/api/playlists', (req, res) => {
-  const playlists = require('./playlists.json');
-  res.json(playlists);
 });
 
 app.get('/oauth2callback', (req, res) => {
@@ -147,8 +142,4 @@ app.get('/oauth2callback', (req, res) => {
 
     res.send('Playlists, their titles and videos saved. Images are downloading.'); 
   });
-});
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
 });
