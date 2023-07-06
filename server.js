@@ -78,7 +78,6 @@ app.get('/oauth2callback', (req, res) => {
       const response = await youtube.playlists.list({
         part: 'snippet,contentDetails',
         mine: true,
-        maxResults: 50,
         pageToken: pageToken  
       });
 
@@ -101,7 +100,6 @@ app.get('/oauth2callback', (req, res) => {
       const playlistItemsResponse = await youtube.playlistItems.list({
         playlistId: playlist.id,
         part: 'snippet,contentDetails',
-        maxResults: 200  
       });
       playlist.videos = playlistItemsResponse.data.items;
     }
@@ -143,3 +141,4 @@ app.get('/oauth2callback', (req, res) => {
     res.send('Playlists, their titles and videos saved. Images are downloading.'); 
   });
 });
+
