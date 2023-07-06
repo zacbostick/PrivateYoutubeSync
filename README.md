@@ -39,7 +39,7 @@ Before you begin, make sure you have Node.js installed on your machine.
 
 - The server runs on port 3000.
 - OAuth2 is used for YouTube API authentication. Make sure you have a valid `credentials.json` file in your project root directory. This file should contain your OAuth2 client credentials, including `client_id`, `client_secret`, and `redirect_uris`. You can get these credentials from your Google Cloud Console.
-- The application starts by redirecting to `/authorize` where you authenticate your Google account and grant access to the YouTube Data API.
+- The application starts by taking you to the authentication page where you authenticate your Google account and grant access to the YouTube Data API.
 - On successful authorization, the application receives an OAuth2 code which it exchanges for access and refresh tokens.
 - The application then fetches all your playlists and their respective videos using the YouTube Data API.
 - The data fetched includes video titles, descriptions, IDs, and high resolution thumbnails, which are saved in a JSON file and also converted to a CSV file.
