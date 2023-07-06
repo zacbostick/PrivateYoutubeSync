@@ -21,7 +21,8 @@ Before you begin, make sure you have Node.js installed on your machine.
     cd PrivateYouTubeSync
     npm install
     ```
-3. Start the application by running: 
+3. Rename the `mycredentials.json` to `credentials.json` and replace the contents with your own OAuth2 client credentials from your Google Cloud Console.
+4. Start the application by running: 
     ```bash
     npm start
     ```
@@ -37,7 +38,7 @@ Before you begin, make sure you have Node.js installed on your machine.
 ### Important Notes
 
 - The server runs on port 3000.
-- OAuth2 is used for YouTube API authentication. Make sure you have a valid `credentials.json` file in your project root directory. I have included a mycredentials.json file that is the structure your credentials.json file should follow. You can get these credentials from your google cloud console.
+- OAuth2 is used for YouTube API authentication. Make sure you have a valid `credentials.json` file in your project root directory. This file should contain your OAuth2 client credentials, including `client_id`, `client_secret`, and `redirect_uris`. You can get these credentials from your Google Cloud Console.
 - The application starts by redirecting to `/authorize` where you authenticate your Google account and grant access to the YouTube Data API.
 - On successful authorization, the application receives an OAuth2 code which it exchanges for access and refresh tokens.
 - The application then fetches all your playlists and their respective videos using the YouTube Data API.
@@ -51,3 +52,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 ## License
 
 This project is licensed under the terms of the [MIT license](LICENSE.txt).
+
